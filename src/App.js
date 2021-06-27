@@ -11,7 +11,9 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
-import { Login } from './components/Login';
+import {useRoutes} from 'hookrouter';
+import MyRoutes from './components/MyRoutes'
+// import { Login } from './components/Login';
 
 export const MyContext = React.createContext();
 
@@ -49,6 +51,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  const routeResult = useRoutes(MyRoutes);
   return (
     <ChakraProvider theme={theme}>
       <MyContext.Provider
@@ -57,7 +60,7 @@ function App() {
           dispatch
         }}
       >
-        <Login/>
+        {routeResult}
       </MyContext.Provider>
     </ChakraProvider>
     // <ChakraProvider theme={theme}>

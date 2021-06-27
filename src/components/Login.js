@@ -23,7 +23,7 @@ import {
   CloseButton,
 } from '@chakra-ui/react';
 
-export const Login = () => {
+const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleShow = () => setShow(!show);
   const { dispatch } = React.useContext(MyContext);
@@ -165,3 +165,5 @@ export const Login = () => {
     </Flex>
   );
 };
+
+export default Login;
