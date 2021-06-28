@@ -13,7 +13,6 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import {useRoutes} from 'hookrouter';
 import MyRoutes from './components/MyRoutes'
-// import { Login } from './components/Login';
 
 export const MyContext = React.createContext();
 
@@ -42,7 +41,9 @@ const reducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        user: null
+        username: null,
+        role: null,
+        token: null
       };
     default:
       return state;
