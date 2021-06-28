@@ -91,7 +91,7 @@ const Login = () => {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      backgroundImage={'../../assets/login/bg.svg'}
+      backgroundImage={'../../public/assets/login/bg.svg'}
       mx={'15%'}
     >
       <Stack spacing={8} mx={'auto'} minW={'50%'} py={12} px={6}>
@@ -129,7 +129,7 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                   <InputRightElement width="4.5rem">
-                      <img src='../../assets/login/group 18.svg' onClick={handleShow}/>
+                      <img src='../../public/assets/login/group 18.svg' onClick={handleShow}/>
                     {/* <Button h="1.75rem" size="sm" onClick={handleClick}>
                       {show ? 'Hide' : 'Show'}
                     </Button> */}
