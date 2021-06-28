@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { MyContext } from '../App';
-import Header from './Header';
 
 import {
+  Center,
+  ArrowForwardIcon,
   Flex,
   Box,
   FormControl,
@@ -14,31 +15,103 @@ import {
   Button,
   Heading,
   Divider,
-  InputGroup,
-  InputRightElement,
-  Text,
-  useColorModeValue,
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  CloseButton,
-  Tab,
-  Tabs,
-  TabPanel,
-  TabPanels,
-  TabList,
+  Th,
+  Tr,
+  Table,
+  Thead,
+  Tbody,
+  Td,
 } from '@chakra-ui/react';
 
 const AdminUser = props => {
   const initialState = {
-    user_image: 'assets/nav/users/user_w@1x.svg',
-    art_image: 'assets/nav/art/supervised_user_circle.svg',
+    page_number: 1,
+    number_of_pages: 0,
+    items_per_page: 5,
+    users: null,
   };
-  const [data, setData] = React.useState(initialState);
+  const [state, setState] = React.useState(initialState);
+  const api_url = process.env.REACT_APP_API_URL;
+  const { state: myState } = React.useContext(MyContext);
 
-  
+  React.useEffect(() => {
+    console.log('state', state);
+    // fetch(api_url + 'users?page_size=5&page_number=1', {
+    fetch(
+      api_url +
+        `users?page_size=${state.items_per_page}&page_number=${state.page_number}`,
+      {
+        headers: {
+          Authorization: `Bearer ${myState.token}`,
+        },
+      }
+    )
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw res;
+        }
+      })
+      .then(resJson => {
+        console.log(resJson);
+        let data = {
+          ...state,
+          users: resJson.users,
+          number_of_pages: resJson.number_of_pages
+        };
+        setState(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [state.page_number]);
+
   return (
-    <div></div>
+    <Fragment>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Th>ID</Th>
+            <Th>Username</Th>
+            <Th>Phone</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {state.users &&
+            state.users.map((user, index) => (
+              <Tr>
+                <Td>{index}</Td>
+                <Td>{user.username}</Td>
+                <Td>{user.phone}</Td>
+              </Tr>
+            ))}
+        </Tbody>
+      </Table>
+      <Center>
+        <Stack direction="row">
+          <Button
+            colorScheme="teal"
+            disabled={state.page_number === 1 ? true : false}
+            onClick={() =>
+              setState({ ...state, page_number: state.page_number - 1 })
+            }
+          >
+            Prev Page
+          </Button>
+          <Button
+          colorScheme="teal"
+          disabled={state.page_number === state.number_of_pages ? true : false}
+            // rightIcon={<ArrowForwardIcon />}
+            onClick={() =>
+              setState({ ...state, page_number: state.page_number + 1 })
+            }
+          >
+            Next Page
+          </Button>
+        </Stack>
+      </Center>
+    </Fragment>
   );
 };
 
