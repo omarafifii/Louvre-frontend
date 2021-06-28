@@ -134,7 +134,7 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                   <InputRightElement width="4.5rem">
-                      <img src='assets/login/group 18.svg' onClick={handleShow}/>
+                      <img src='assets/login/group_18.svg' onClick={handleShow}/>
                     {/* <Button h="1.75rem" size="sm" onClick={handleClick}>
                       {show ? 'Hide' : 'Show'}
                     </Button> */}
