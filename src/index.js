@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <StrictMode>
+  // <StrictMode>
+  <div>
     <ColorModeScript />
     <App />
-  </StrictMode>,
+  </div>,
+  // </StrictMode>,
   document.getElementById('root')
 );
 
