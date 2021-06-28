@@ -1,4 +1,5 @@
 import React from 'react';
+import {navigate} from 'hookrouter';
 import { MyContext } from '../App';
 import jwt_decode from "jwt-decode";
 import {
@@ -27,6 +28,8 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleShow = () => setShow(!show);
   const { dispatch } = React.useContext(MyContext);
+  const api_url = process.env.REACT_APP_API_URL;
+  console.log('url env', api_url);
 
   const initialState = {
     username: '',
@@ -49,7 +52,7 @@ const Login = () => {
       isSubmitting: true,
       errorMessage: null
     });
-    fetch("http://localhost:8080/login", {
+    fetch(api_url + "login", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -75,6 +78,7 @@ const Login = () => {
             type: "LOGIN",
             payload: {...decoded, ...resJson}
         })
+        navigate('/home');
         
       })
       .catch(error => {
@@ -91,7 +95,8 @@ const Login = () => {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      backgroundImage={'../../public/assets/login/bg.svg'}
+      // backgroundImage={'../../assets/login/bg.svg'}
+      backgroundImage={'assets/login/bg.svg'}
       mx={'15%'}
     >
       <Stack spacing={8} mx={'auto'} minW={'50%'} py={12} px={6}>
@@ -129,7 +134,7 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                   <InputRightElement width="4.5rem">
-                      <img src='../../public/assets/login/group 18.svg' onClick={handleShow}/>
+                      <img src='assets/login/group 18.svg' onClick={handleShow}/>
                     {/* <Button h="1.75rem" size="sm" onClick={handleClick}>
                       {show ? 'Hide' : 'Show'}
                     </Button> */}
