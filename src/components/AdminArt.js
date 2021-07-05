@@ -167,22 +167,6 @@ const AdminArt = props => {
                 <Td>
                   <VStack spacing={2}>
                     <Text noOfLines={2}>{art.description}</Text>
-                    {/* <Text
-                      color={'blue.600'}
-                      onClick={() => {
-                        setState({
-                          ...state,
-                          modal_image: art.image,
-                          modal_title: art.name,
-                          modal_artist: art.artist,
-                          modal_description: art.description,
-                        });
-                        onOpen();
-                      }}
-                    >
-                      {' '}
-                      More details
-                    </Text> */}
                     <Button
                       colorScheme="blue"
                       variant="link"

@@ -74,7 +74,6 @@ const Login = () => {
         let decoded = jwt_decode(token);
         // console.log('resjson: ', resJson);
         // console.log('decoded: ', decoded);
-        // let payload1 = decoded.concat(resJson);
         dispatch({
           type: 'LOGIN',
           payload: { ...decoded, ...resJson },
@@ -153,9 +152,6 @@ const Login = () => {
                   />
                   <InputRightElement width="4.5rem">
                     <img src="assets/login/group_18.svg" onClick={handleShow} />
-                    {/* <Button h="1.75rem" size="sm" onClick={handleClick}>
-                      {show ? 'Hide' : 'Show'}
-                    </Button> */}
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
