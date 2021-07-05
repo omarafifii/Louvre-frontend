@@ -34,27 +34,27 @@ import {
 const HomeAdmin = props => {
   const initialState = {
     user_image: 'assets/nav/users/user@1x.svg',
-    art_image: 'assets/nav/art/supervised_user_circle@1x.svg',
+    art_image: 'assets/nav/art/supervised_user_circle.svg',
   };
   const [data, setData] = React.useState(initialState);
 
   const setTabImage = index => {
-    console.log('index ', index);
+    // console.log('index ', index);
     let mydata;
     switch (index) {
       case 0:
-        console.log('case 0');
+        // console.log('case 0');
         mydata = {
           user_image: 'assets/nav/users/user@1x.svg',
-          art_image: 'assets/nav/art/supervised_user_circle@1x.svg',
+          art_image: 'assets/nav/art/supervised_user_circle.svg',
         };
         setData(mydata);
         break;
       case 1:
-        console.log('case 1');
+        // console.log('case 1');
         mydata = {
           user_image: 'assets/nav/users/user_w@1x.svg',
-          art_image: 'assets/nav/art/supervised_user_circle.svg',
+          art_image: 'assets/nav/art/supervised_user_circle@1x.svg',
         };
         setData(mydata);
         break;
