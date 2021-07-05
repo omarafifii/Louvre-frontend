@@ -1,7 +1,7 @@
 import React from 'react';
-import {navigate} from 'hookrouter';
+import { navigate } from 'hookrouter';
 import { MyContext } from '../App';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 import {
   Flex,
   Box,
@@ -10,6 +10,7 @@ import {
   Input,
   Checkbox,
   Stack,
+  HStack,
   Link,
   Button,
   Heading,
@@ -29,7 +30,7 @@ const Login = () => {
   const handleShow = () => setShow(!show);
   const { dispatch } = React.useContext(MyContext);
   const api_url = process.env.REACT_APP_API_URL;
-  console.log('url env', api_url);
+  // console.log('url env', api_url);
 
   const initialState = {
     username: '',
@@ -50,17 +51,17 @@ const Login = () => {
     setData({
       ...data,
       isSubmitting: true,
-      errorMessage: null
+      errorMessage: null,
     });
-    fetch(api_url + "login", {
-      method: "post",
+    fetch(api_url + 'login', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username: data.username,
-        password: data.password
-      })
+        password: data.password,
+      }),
     })
       .then(res => {
         if (res.ok) {
@@ -71,21 +72,20 @@ const Login = () => {
       .then(resJson => {
         let token = resJson.token;
         let decoded = jwt_decode(token);
-        console.log("resjson: ",resJson);
-        console.log("decoded: ",decoded);
+        // console.log('resjson: ', resJson);
+        // console.log('decoded: ', decoded);
         // let payload1 = decoded.concat(resJson);
         dispatch({
-            type: "LOGIN",
-            payload: {...decoded, ...resJson}
-        })
+          type: 'LOGIN',
+          payload: { ...decoded, ...resJson },
+        });
         navigate('/home');
-        
       })
       .catch(error => {
         setData({
           ...data,
           isSubmitting: false,
-          errorMessage: error.message || error.statusText
+          errorMessage: error.message || error.statusText,
         });
       });
   };
@@ -96,7 +96,8 @@ const Login = () => {
       align={'center'}
       justify={'center'}
       // backgroundImage={'../../assets/login/bg.svg'}
-      backgroundImage={'assets/login/bg.svg'}
+      bgImage={'assets/login/bg.svg'}
+      bgPosition="center"
       mx={'15%'}
     >
       <Stack spacing={8} mx={'auto'} minW={'50%'} py={12} px={6}>
@@ -105,12 +106,29 @@ const Login = () => {
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}
+          // py={8}
         >
-          <Stack spacing={4}>
+          <Stack spacing={4} >
             <Text align={'center'} fontSize={'xl'} fontWeight={600}>
               Log In
             </Text>
-            {/* <Divider px={'0'} orientation={'horizontal'} bg={'blue.500'}/> */}
+            <HStack  spacing={0} >
+            <Box 
+            bgColor='blue.100'
+            w="20%" 
+            h={1}
+            ></Box>
+            <Box 
+            bgColor='blue.400'
+            w="60%" 
+            h={1}
+            ></Box>
+            <Box 
+            bgColor='blue.100'
+            w="20%" 
+            h={1}
+            ></Box>
+            </HStack >
             <Box mx={8}>
               <FormControl id="email">
                 <FormLabel>Username</FormLabel>
@@ -134,7 +152,7 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                   <InputRightElement width="4.5rem">
-                      <img src='assets/login/group_18.svg' onClick={handleShow}/>
+                    <img src="assets/login/group_18.svg" onClick={handleShow} />
                     {/* <Button h="1.75rem" size="sm" onClick={handleClick}>
                       {show ? 'Hide' : 'Show'}
                     </Button> */}
