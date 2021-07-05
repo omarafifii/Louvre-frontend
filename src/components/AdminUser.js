@@ -13,6 +13,7 @@ import {
   Stack,
   Link,
   Button,
+  ButtonGroup,
   Heading,
   Divider,
   Th,
@@ -25,7 +26,7 @@ import {
 
 const AdminUser = props => {
   const initialState = {
-    page_number: 1,
+    current_page: 1,
     number_of_pages: 0,
     items_per_page: 5,
     users: null,
@@ -34,12 +35,37 @@ const AdminUser = props => {
   const api_url = process.env.REACT_APP_API_URL;
   const { state: myState } = React.useContext(MyContext);
 
+  // Logic for displaying page numbers
+  const pageNumbers = [];
+  for (let i = 1; i <= state.number_of_pages; i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map(number => {
+    return (
+      <Button
+        key={number}
+        id={number}
+        onClick={() =>
+          // handlePageClick(number)
+          setState({ ...state, current_page: number })
+        }
+        bg={number === state.current_page ? 'blue.400' : ''}
+        // colorScheme={(number === state.current_page)?"blue":""}
+
+        // bg="blue.400"
+      >
+        {number}
+      </Button>
+    );
+  });
+
   React.useEffect(() => {
-    console.log('state', state);
-    // fetch(api_url + 'users?page_size=5&page_number=1', {
+    // console.log('state', state);
+    // fetch(api_url + 'users?page_size=5&current_page=1', {
     fetch(
       api_url +
-        `users?page_size=${state.items_per_page}&page_number=${state.page_number}`,
+        `users?page_size=${state.items_per_page}&page_number=${state.current_page}`,
       {
         headers: {
           Authorization: `Bearer ${myState.token}`,
@@ -54,18 +80,18 @@ const AdminUser = props => {
         }
       })
       .then(resJson => {
-        console.log(resJson);
+        // console.log(resJson);
         let data = {
           ...state,
           users: resJson.users,
-          number_of_pages: resJson.number_of_pages
+          number_of_pages: resJson.number_of_pages,
         };
         setState(data);
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
       });
-  }, [state.page_number]);
+  }, [state.current_page]);
 
   return (
     <Fragment>
@@ -81,7 +107,10 @@ const AdminUser = props => {
           {state.users &&
             state.users.map((user, index) => (
               <Tr>
-                <Td>{index}</Td>
+                {/* <Td>{index}</Td> */}
+                <Td>
+                  {index + state.items_per_page * (state.current_page - 1)}
+                </Td>
                 <Td>{user.username}</Td>
                 <Td>{user.phone}</Td>
               </Tr>
@@ -89,27 +118,30 @@ const AdminUser = props => {
         </Tbody>
       </Table>
       <Center>
-        <Stack direction="row">
+        <ButtonGroup m={5} size="sm" isAttached variant="outline">
           <Button
-            colorScheme="teal"
-            disabled={state.page_number === 1 ? true : false}
+            // colorScheme="teal"
+            disabled={state.current_page === 1 ? true : false}
             onClick={() =>
-              setState({ ...state, page_number: state.page_number - 1 })
+              setState({ ...state, current_page: state.current_page - 1 })
             }
           >
             Prev Page
           </Button>
+          {renderPageNumbers}
           <Button
-          colorScheme="teal"
-          disabled={state.page_number === state.number_of_pages ? true : false}
+            // colorScheme="teal"
+            disabled={
+              state.current_page === state.number_of_pages ? true : false
+            }
             // rightIcon={<ArrowForwardIcon />}
             onClick={() =>
-              setState({ ...state, page_number: state.page_number + 1 })
+              setState({ ...state, current_page: state.current_page + 1 })
             }
           >
             Next Page
           </Button>
-        </Stack>
+        </ButtonGroup>
       </Center>
     </Fragment>
   );
