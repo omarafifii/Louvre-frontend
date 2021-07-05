@@ -17,18 +17,19 @@ import MyRoutes from './components/MyRoutes'
 export const MyContext = React.createContext();
 
 const initialState = {
-  isAuthenticated: false,
-  username: null,
-  role: null,
-  token: null,
+  isAuthenticated: localStorage.getItem("isAuthenticated") || false,
+  username: localStorage.getItem("username") || null,
+  role: localStorage.getItem("role") || null,
+  token: localStorage.getItem("token") || null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem("username", JSON.stringify(action.payload.username));
-      localStorage.setItem("role", JSON.stringify(action.payload.role));
-      localStorage.setItem("token", JSON.stringify(action.payload.token));
-      console.log("payload: ",action.payload);
+      localStorage.setItem("username", action.payload.username);
+      localStorage.setItem("role", action.payload.role);
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("isAuthenticated", true);
+      // console.log("payload: ",action.payload);
       return {
         ...state,
         isAuthenticated: true,
