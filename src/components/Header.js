@@ -43,7 +43,7 @@ const Header = props => {
 
   const handleLogout = event => {
     event.preventDefault();
-    console.log('In handlelogout');
+    // console.log('In handlelogout');
     setData({
       ...data,
       isSubmitting: true,
@@ -57,7 +57,7 @@ const Header = props => {
       },
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.ok) {
           dispatch({
             type: 'LOGOUT',
@@ -69,14 +69,14 @@ const Header = props => {
         throw res;
       })
       //   .then(resJson => {
-      //     console.log('2');
+      //     // console.log('2');
       //     dispatch({
       //         type: "LOGOUT",
       //         payload: {}
       //     })
-      //     console.log('3');
+      //     // console.log('3');
       //     navigate('/');
-      //     console.log('4');
+      //     // console.log('4');
       //   })
       .catch(error => {
         setData({
@@ -100,9 +100,9 @@ const Header = props => {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
       >
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex flex={{ base: 1 }} justify={{ base: 'left', md: 'start' }}>
           <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            textAlign={useBreakpointValue({ base: 'left', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
           >
