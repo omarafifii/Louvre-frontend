@@ -1,3 +1,54 @@
+# Louvre Frontend
+
+This is a mini online version of the Louvre museum in which guests
+ can login and view ancient art pieces and know about their 
+ history and artists. Also, museum staff can manage art pieces 
+ and view system guests. We will do this by building a 
+ simple backend microservice in NodeJS, 
+ and a frontend service based on ReactJS to consume this API. 
+ The project will have these functionalities:
+
+● JWT Authentication
+
+● RBAC (role based authentication)
+
+● Performing CRUD on the api
+
+## Useful Links
+
+Deployment on Heroku: https://louvre-frontend.herokuapp.com/
+
+Backend Github: https://github.com/omarafifii/louvre-backend
+
+## Usage
+
+Use these users for testing the application:-
+
+**For Admin user**
+
+username: admin
+
+password: admin
+
+**For normal user**
+
+username: omar
+
+password: password
+
+## Things present in the application
+
+* JWT Authentication
+* Persistant session after refresh
+* Pagination
+* React Routing
+* React Hooks and Context API
+
+## Screenshots
+
+Coming soon ...
+
+##
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
