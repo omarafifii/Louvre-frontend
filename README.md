@@ -6,6 +6,7 @@ This is a mini online version of the Louvre museum in which guests
  and view system guests. We will do this by building a 
  simple backend microservice in NodeJS, 
  and a frontend service based on ReactJS to consume this API. 
+ 
  The project will have these functionalities:
 
 ● JWT Authentication
@@ -16,7 +17,7 @@ This is a mini online version of the Louvre museum in which guests
 
 ## Useful Links
 
-Deployment on Heroku: https://louvre-frontend.herokuapp.com/
+Deployment on Heroku: https://louvre.omarafifi.com/
 
 Backend Github: https://github.com/omarafifii/louvre-backend
 
