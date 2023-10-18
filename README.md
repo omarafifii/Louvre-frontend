@@ -17,7 +17,7 @@ This is a mini online version of the Louvre museum in which guests
 
 ## Useful Links
 
-Deployment on Heroku: https://louvre.omarafifi.com/
+Deployment: https://louvre.omarafifi.com/
 
 Backend Github: https://github.com/omarafifii/louvre-backend
 
